@@ -63,10 +63,48 @@
 *### $index->show();
 */
 require_once ("./api/tpls/tpl_engine.php");
-$index = new tpl("index");
-$index->assign("content", "Hello");
-$index->replace();
-$index->show();
+require_once ("./api/db/db.php");
 
+$db = new db;
+
+if(empty($_GET["do"])) $_GET["do"]="overview";
+	$GLOBALS["do"]=$_GET["do"];
+	$GLOBALS['QUERY_STRING'] = $_SERVER['QUERY_STRING'];
+
+switch ($_GET["do"])
+	{
+        case "register":
+                        $register = new tpl("register");
+                        if(isset($_POST['register'])){
+                            $username = $_POST['username'];
+                            $useremail = $_POST['email'];
+                            $userpwd = $_POST['password'];
+                            $db->connect();
+                            $sql = "INSERT INTO user (userName, userEmail, userPWD ) VALUES ('$username', '$useremail', '$userpwd')";
+                            $db->query($sql);
+                            $db->close();
+                        }
+                        $index->assign("content", $register->replace());
+                        break;
+        default:        
+                        $db->connect();										
+                        $sql = 'SELECT * FROM user';  
+                        $result = $db->query($sql);		 		
+                        while($row = $db->fetch_array($result)){		
+                            $users = new tpl("users_list");
+                            foreach ($row as $key => $value) {
+                                $users->assign($key, $value);
+                            }
+                            $usersRows[] = $users;
+                        }
+                        $db->close();								
+                        $usersListContents = tpl::merge($usersRows);	
+                        $usersList  = new tpl("users");
+                        $usersList->assign("users", $usersListContents);
+                        $index = new tpl("index");
+                        $index->assign("content", $usersList->replace());
+                        $index->replace();
+                        $index->show();
+    }
 ?>
 
