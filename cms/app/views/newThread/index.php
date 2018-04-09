@@ -10,6 +10,7 @@
         </ol>  
     </div>
     {$success}
+    {$error}
     <form method="post">
         <div class="row">
             <div class="container breadcrumb card-header bg-dark border_color">

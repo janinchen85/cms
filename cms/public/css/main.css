@@ -13,8 +13,13 @@ body{
     background-color: #3e3f3e;
 }
 
+a{
+    font-weight: bold;
+}
+
 a:link, a:visited{
     color: white;
+    font-weight: bold;
 }
 
 a:hover{
@@ -25,6 +30,10 @@ a:hover{
 a:active, .active{
     color: #bf0d0c;
     font-weight: bold;
+}
+
+.error{
+    text-align: center;
 }
 
 .fhead{
@@ -38,6 +47,10 @@ a:active, .active{
 
 .border_green{
     border: 1px solid #049c1d;
+}
+
+.border_red{
+    border: 1px solid #bf0d0c;
 }
 
 .red{

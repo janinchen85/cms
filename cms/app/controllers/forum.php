@@ -17,7 +17,10 @@ class Forum extends Controller{
                 $index->assign($key, $value);
             }
         }
-        $sql = 'SELECT * FROM thread WHERE forumID = :forumID';
+        $sql = 'SELECT * FROM thread t
+                JOIN user u
+                ON t.userID = u.userID
+                WHERE t.forumID = :forumID';
         $db->query($sql);
         $db->bind(':forumID', $forumID);
         $results = $db->results();

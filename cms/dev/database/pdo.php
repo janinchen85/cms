@@ -1,16 +1,21 @@
 <?php
 
-class DB {
     	 // ################ Configurations ######################
 		/* Your SQL Database server */
-		private $host = 'localhost';
+		define('DBHOST','localhost');
 		/* Your SQL Database Username */
-		private $user = 'root';
+		define('DBUSER','root');
 		/* Your SQL Database Password */
-		private $pw = '';
+		define('DBPASS','');
 		/* Your SQL Database Name */
-        private $dbName = 'cms';
+        define('DBNAME','cms');
+        // Your Site Domain
+        define('DIR','localhost');
+        // Your Site Email
+        define('SITEEMAIL','noreply@domain.com');
 
+class DB {
+    
         private $con;
         private $error;
         private $qError;
@@ -18,18 +23,19 @@ class DB {
         private $stmt;
         
         public function connect(){
-            $dbs = "mysql:host=".$this->host.";dbname=".$this->dbName;
+            $dbs = "mysql:host=".DBHOST.";dbname=".DBNAME;
             $options = array(
                 PDO::ATTR_PERSISTENT    => true,
                 PDO::ATTR_ERRMODE       => PDO::ERRMODE_EXCEPTION
                 );
             
             try{
-                $this->con = new PDO($dbs, $this->user, $this->pw, $options);
+                $this->con = new PDO($dbs, DBUSER, DBPASS, $options);
             }
             //catch any errors
             catch (PDOException $e){
                 $this->error = $e->getMessage();
+                exit;
             }
             
         }

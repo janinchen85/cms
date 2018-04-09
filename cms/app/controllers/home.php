@@ -36,6 +36,15 @@ class Home extends Controller{
                 foreach ($result as $key => $value) {
                     $forumList->assign($key, $value);
                 }
+                $sql = 'SELECT COUNT(*) AS count FROM thread 
+                        WHERE forumID = :id';
+                $db->query($sql);
+                $db->bind(':id', $result["forumID"]);
+                $results = $db->results();
+                foreach($results as $result){
+                    $count = $result["count"];
+                }
+                $forumList->assign("threadCount",$count);
                 $forumRow[$i][] = $forumList;
                 $forumContents = tpl::merge($forumRow[$i]);
                 $index->assign("forumList[".$i."]", $forumContents);
