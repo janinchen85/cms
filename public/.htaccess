@@ -1,0 +1,20 @@
+# Activates the forwarding
+    RewriteEngine On
+# Specifies the directory where to start changing the URL.
+    RewriteBase /cms/public
+# This conditions that must be true.
+# If the requested filename is not a directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+# If the requested filename is not a regular file that exists
+    RewriteCond %{REQUEST_FILENAME} !-f
+# If the requested filename is not a symbolic link
+    RewriteCond %{REQUEST_FILENAME} !-l
+# then rewrite the URL in the following way
+
+# ^(.+)$ means any URL except the server root
+# If the written URL is /index/home
+# index.php?url=$1 will be rewritten to index.php?url=home
+# QSA -> if there is a query string passed with the original URL
+# it will be appended to the rewrite => index.php?url=home&id=1
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+RewriteRule ^\.htaccess$ - [F]

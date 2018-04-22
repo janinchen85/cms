@@ -1,0 +1,371 @@
+@media (min-width: 768px) {
+    .navbar-brand.abs
+        {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+    }
+    
+body{
+    color: white;
+    background-color: #3e3f3e;
+}
+
+a{
+    font-weight: bold;
+}
+
+.redirect{
+    font-size: 2px;
+}
+
+a:link, a:visited{
+    color: white;
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #bf0d0c;
+    font-weight: bold;
+}
+a:active, .active{
+    color: #bf0d0c;
+    font-weight: bold;
+}
+
+.error{
+    text-align: center;
+}
+
+.fhead{
+    height: 30px !important;
+    padding: 2px 0px 2px 20px !important;
+}
+
+.border_color{
+    border: 1px solid #bf0d0c;
+}
+
+.border_green{
+    border: 1px solid #049c1d;
+}
+
+.border_red, .btn:hover{
+    border: 1px solid #bf0d0c;
+}
+
+.border_sep{
+    border-bottom: 1px solid #bf0d0c;
+}
+
+.red{
+    background-color: #bf0d0c;
+    color: white;
+}
+
+.orange{
+    background-color: #fabb2b;
+}
+
+.btn-newThread:first-child{
+    padding-bottom: 15px;
+    text-align: right;
+}
+
+.btn-newThread2{
+    padding: 15px;
+    text-align: right;
+}
+
+.btn-newThread a:hover, .btn-newThread2 a:hover{
+    color: white;
+}
+
+.fmain{
+    margin-top: 40px;
+}
+
+.border_bottom{
+    border-bottom: 0.1px solid #bf0d0c;
+}
+
+.getSpan{
+    border-right: 0.1px solid #bf0d0c;
+}
+
+.getSpan span{
+    display: inline-block;
+}
+
+
+.getSpan > span.center{
+    text-align: center;
+}
+
+.avatar{
+    border-radius: 15% !important;
+    padding: 10px;;
+}
+
+.getSpan > span.center > label{
+    display: inline-block;
+    text-align: left;
+    width: 80% !important;
+}
+
+.label-infos{
+    text-align:  left !important;
+    width: 60% !important;
+    background-color: grey;
+}
+
+.cMiddle{
+    border: 1px solid rgba(255,255,255, .15);
+    border-radius: 3px;
+    display: inline-block;
+    width: 100%;
+    min-height: 250px;
+    padding: 10px;
+}
+
+.cInfo{
+    display: block;
+    height: 100%;
+    margin-top: 10%;
+    width: 100%;
+}
+
+.tTitle{
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.left{
+    width: 50%;
+    text-align: left;
+    float: left;
+    font-size: 12px;
+}
+.right{
+    width: 50%;
+    text-align: right;
+    float: left;
+    font-size: 12px;
+}
+
+.message{
+    display: inline-block;
+    font-size: 13px;
+    word-wrap: normal;
+    word-spacing: 2px;
+}
+
+.postBtn{
+    text-align: right;
+}
+
+.panel-heading > span.headRight{
+    text-align: right;
+}
+
+.rank-administrator{
+    background-color: springgreen;
+}
+
+.rank-moderator{
+    background-color: rgb(225, 0, 255);
+}
+
+.rank-user{
+    background-color: rgb(55, 0, 255);
+}
+
+.rank-guest{
+    background-color: rgb(166, 255, 0);
+}
+
+.line{
+    font-size: 1px;
+}
+
+.social{
+	text-align:center;
+    font-size:16px;
+    padding-bottom: 5px;
+}
+
+.social-login{
+	text-align:center;
+	font-size:12px;
+}
+.social-login p{
+	margin:15px 0;
+}
+.social-login ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+.social-login ul li{
+	width:33%;
+	float:left;
+    clear:fix;
+}
+.social-login ul li a{
+	font-size:13px;
+	color:#fff;
+	text-decoration:none;
+	padding:10px 0;
+	display:block;
+}
+.social-login ul li:nth-child(1) a{
+	background:#3b5998;
+}
+.social-login ul li:nth-child(2) a{
+	background:#e74c3d;
+}
+.social-login ul li:nth-child(3) a{
+	background:#3698d9;
+}
+
+.register-form{
+    font-size: 16px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.regbutton{    
+    height: 50px;
+    width: 100%;
+    background-color:tomato;
+    border-radius: 0px;
+    font-size: 18px;
+    color:white;
+    border: none !important;
+    margin-bottom: 15px;
+    margin-top: -15px;
+}
+
+.updbutton{    
+    height: 50px;
+    width: 100%;
+    background-color:#fabb2b;
+    border-radius: 0px;
+    font-size: 18px;
+    color:black;
+    border: none !important;
+    margin-bottom: 15px;
+    margin-top: -15px;
+}
+
+.regbutton:hover{    
+    color: white;
+    background-color:#aa422f;
+}
+.regbutton:active{    
+    color: white;
+    background-color:#aa422f;
+}
+.logbutton{    
+    height: 50px;
+    width: 200px;
+    background-color:yellowgreen;
+    border-radius: 0px;
+    font-size: 18px;
+    color:white;
+    border: none !important;
+    margin-bottom: 5px;
+}
+.logbutton:hover{    
+    color: white;
+    background-color:darkolivegreen;
+}
+.logbutton:active{    
+    color: white;
+    background-color:darkolivegreen;
+}
+
+
+
+label{
+    color: aliceblue;
+    
+}
+input{
+    margin-bottom: 5px;
+    width: 430px;
+    height: 40px;
+    border-radius: 0px;
+    padding-bottom: 5px;
+}
+
+.edits{
+    font-size: 12px;
+}
+
+.tool {
+    cursor : help;
+    position : relative;
+  }
+  
+  .tool::before, .tool::after {
+    position : absolute;
+    left : 50%;
+    opacity : 0;
+    z-index: -100;
+  }
+  
+  .tool:hover::before, .tool:focus::before, .tool:hover::after, .tool:focus::after {
+    opacity : 1;
+    z-index: 100;
+  }
+  
+  .tool::before {
+    border-style : solid;
+    border-width : 1em .75em 0 .75em;
+    border-color : #bf0d0c transparent transparent transparent;
+    bottom : 100%;
+    margin-left : -.5em;
+    content : " ";
+  }
+  
+  .tool::after {
+    background : #3e474f;
+    border-radius : .25em;
+    bottom : 145%;
+    color : white;
+    font-size: 12px;
+    width : auto;
+    padding: 1em;
+    margin-left : -8.75em;
+    content : attr(data-tip);
+    border: 1px solid #bf0d0c;
+  }
+
+ .threadText{
+     min-height: 400px;
+ }
+
+ .threadOptions{
+    min-height: 60px;
+}
+
+.bbcenter{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+
+.hidden{
+    display: none;
+}
