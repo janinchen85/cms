@@ -1,9 +1,10 @@
 {$header}
 {$navbar}
+<div class="section forum" id="section2">
 <br><br><br><br>
-<main role="main" class="container mx-auto w-100 justify-content-center">
-    <div class="row">
-        <ol class="container breadcrumb card-header bg-dark border_color">
+<main role="main" class="container cat_border">
+    <div class="row category_head">
+        <ol>
         <li>Logout successful</li>
         </ol>  
     </div>

@@ -11,7 +11,6 @@ class Users extends DB{
         $this->timestamp        = time();
         $this->date             = date("Y.m.d",$this->timestamp);
         $this->time             = date("H:i:s",$this->timestamp);
-        $this->options          = '';
     }
 
     public function getUserByName($userName){        
@@ -51,7 +50,7 @@ class Users extends DB{
         $this->db->query($this->sql);
         $this->db->bind(':userName', $userName);
         $this->db->bind(':userEmail', $userEmail);
-        $this->db->bind(':userPW', trim(password_hash($userPW, PASSWORD_BCRYPT, $this->options)));
+        $this->db->bind(':userPW', trim(password_hash($userPW, PASSWORD_BCRYPT)));
         $this->db->bind(':userRegDate', $this->date);
         $this->db->execute();
         $this->db->close();
@@ -73,6 +72,7 @@ class Users extends DB{
         $this->db->close();
     }
 
+    /*
     public function addUserPostCount($userID){
         $this->db->connect();
         $this->sql = 'SELECT * FROM user 
@@ -91,6 +91,30 @@ class Users extends DB{
         $this->db->bind(':userPosts', $userPosts);
         $this->db->execute();
         $this->db->close();
+    }*/
+
+    public function countUserPosts($userID){
+        $this->db->connect();
+        $this->sql = 'SELECT count(*) 
+                      AS userPosts 
+                      FROM post 
+                      WHERE userID = :userID';
+        $this->db->query($this->sql);
+        $this->db->bind(':userID', $userID);
+        $this->db->close();
+        return $this->db->result(); 
+    }
+
+    public function countUserThreads($userID){
+        $this->db->connect();
+        $this->sql = 'SELECT count(*) 
+                      AS userThreads 
+                      FROM thread
+                      WHERE userID = :userID';
+        $this->db->query($this->sql);
+        $this->db->bind(':userID', $userID);
+        $this->db->close();
+        return $this->db->result(); 
     }
 
     public function updateUserPicture($userID, $picture){
@@ -105,14 +129,14 @@ class Users extends DB{
         $this->db->close();
     }
 
-    public function updateUserStatus($userID, $userStatus){
+    public function updateUserStatus($userID, $status){
         $this->db->connect();
         $this->sql = 'UPDATE user 
                       SET userStatus = :userStatus 
                       WHERE userID = :userID';
         $this->db->query($this->sql);
         $this->db->bind(':userID', $userID);
-        $this->db->bind(':userStatus', $userStatus);
+        $this->db->bind(':userStatus', $status);
         $this->db->execute();
         $this->db->close();
     }

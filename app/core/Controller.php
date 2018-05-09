@@ -3,7 +3,7 @@
 class Controller {
     private $timezone;
     private $root, $modelDir, $viewDir;
-    private $header, $nav, $footer, $loggedIn, $loggedOut, $success, $error;
+    private $header, $nav, $footer, $loggedIn, $loggedOut, $success, $error, $forum;
     private $index, $method;
 
     function __construct() {
@@ -17,12 +17,13 @@ class Controller {
         $this->index                = "home";
         $this->method               = "index";
         $this->header               = new tpl('style/header');
-        $this->nav                  = new tpl('style/navbar');
         $this->footer               = new tpl('style/footer');
         $this->loggedIn             = new tpl('style/loggedin');
         $this->loggedOut            = new tpl('style/loggedout');
+        $this->adminNav             = new tpl('style/adminnav');
         $this->success              = new tpl('message/success');
         $this->error                = new tpl('message/error');
+        $this->forum                = new tpl('forum/index');
     }
 
     public function model($model){
@@ -38,7 +39,8 @@ class Controller {
         return $this->root;
     }
 
-    public function heading($index = "", $method = ""){
+    public function heading($index = "", $method = "", $navbar = ""){
+        $this->nav                  = new tpl('style/'.$navbar.'');
         if(!empty($method)){$this->method = $method;}
         if(!empty($index)){$this->index = $index;}
         $this->index = new tpl($this->index.'/'.$this->method);
@@ -48,8 +50,14 @@ class Controller {
         } else {
             $this->nav->assign("loggedinout", $this->loggedOut->replace());
         }
+        if(isset($_SESSION["userRang"]) && $_SESSION["userRang"] == 1){
+            $this->nav->assign('adminNav', $this->adminNav->replace());
+        } else {
+            $this->nav->assign('adminNav', ""); 
+        }
         $this->index->assign('header', $this->header->replace());
         $this->index->assign('navbar', $this->nav->replace());
+        $this->index->assign('forum', $this->forum->replace());
         $this->index->assign('success', "");
         $this->index->assign('error', "");
         $this->index->assign('footer', $this->footer->replace());
@@ -61,10 +69,11 @@ class Controller {
         $this->index->assign('title', $title);
     }
 
-    public function setSession($sessionUserID, $sessionUserName){
+    public function setSession($sessionUserID, $sessionUserName, $sessionUserRang){
         $_SESSION["active"] = 1;
         $_SESSION["userID"] = $sessionUserID;
         $_SESSION["userName"] = $sessionUserName;
+        $_SESSION["userRang"] = $sessionUserRang;
         $_SESSION["sessionStart"] = time();
     }
 

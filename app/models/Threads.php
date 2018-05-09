@@ -15,8 +15,6 @@ class Threads extends DB{
     public function getThread($threadID){
         $this->db->connect();
         $this->sql = 'SELECT * FROM thread t
-                      JOIN user u
-                      ON t.userID = u.userID
                       WHERE threadID = :threadID';
         $this->db->query($this->sql);
         $this->db->bind(':threadID', $threadID);
@@ -81,6 +79,33 @@ class Threads extends DB{
         $this->lastID = $this->db->lastInsertId();
         $this->db->close();
         return $this->lastID;
+    }
+
+    public function getHotThreads(){
+        $this->db->connect();
+        $this->sql = 'SELECT * FROM thread ORDER BY threadVisits DESC LIMIT 5';
+        $this->db->query($this->sql);
+        $this->db->close();
+        return $this->db->results(); 
+    }
+
+    public function getLatestThreads(){
+        $this->db->connect();
+        $this->sql = 'SELECT * FROM `thread` ORDER BY threadDate DESC, threadTime DESC';
+        $this->db->query($this->sql);
+        $this->db->close();
+        return $this->db->results(); 
+    }
+
+
+    public function countPostsOfThread($threadID){
+        $this->db->connect();
+        $this->sql = 'SELECT COUNT(*) AS count FROM post p
+                      WHERE threadID = :threadID';
+        $this->db->query($this->sql);
+        $this->db->bind(':threadID', $threadID);
+        $this->db->close();  
+        return $this->db->result(); 
     }
 }
 

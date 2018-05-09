@@ -1,7 +1,7 @@
 <?php
 class Profile extends Controller{
     public function index($success = ""){
-        $index = $this->heading("profile");
+        $index = $this->heading("profile","","navbar");
         $this->setTitle("EASV Forum");
         $index->assign("hideForm", "");
         $index->assign('success', $success);
@@ -19,15 +19,19 @@ class Profile extends Controller{
             }
         }
         if(isset($_POST["upload"])) {
-            $target_file = $target_dir.basename($_FILES["userPicUpload"]["name"]);
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            $check = getimagesize($_FILES["userPicUpload"]["tmp_name"]);
-            $width = $check[0];
-            $height = $check[1];
-            if($check == false) {
-                $this->error("This file is not an image");
-                $uploadError = 1;
-            } 
+            if(!empty($_POST) && empty($_SESSION['post'])) {
+                $_SESSION['post'] = true;
+                $target_file = $target_dir.basename($_FILES["userPicUpload"]["name"]);
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                $check = getimagesize($_FILES["userPicUpload"]["tmp_name"]);
+                $width = $check[0];
+                $height = $check[1];
+                if($check == false) {
+                    $this->error("This file is not an image");
+                    $uploadError = 1;
+                }
+                unset($_SESSION['post']); 
+            }
         }
         if(!empty($_FILES["userPicUpload"])){
             if (file_exists($target_file)) {
@@ -64,18 +68,22 @@ class Profile extends Controller{
             }
         }
         if(isset($_POST["update"])) {
-            $index->assign("hideForm", "hidden");
-            $this->model('Users')->updateUserInfo($_SESSION["userID"],$_POST["userName"],$_POST["userEmail"],
-                                                  $_POST["userCourse"],$_POST["userFB"],$_POST["userTW"]);
-            $this->success("Your profile has been updated successfully");
-            $results = $this->model('Users')->getUserInfo($_SESSION["userID"]);
-            foreach($results as $result){
-                foreach ($result as $key => $value) {
-                    $index->assign($key, $value);
+            if(!empty($_POST) && empty($_SESSION['post'])) {
+                $_SESSION['post'] = true;
+                $index->assign("hideForm", "hidden");
+                $this->model('Users')->updateUserInfo($_SESSION["userID"],$_POST["userName"],$_POST["userEmail"],
+                                                    $_POST["userCourse"],$_POST["userFB"],$_POST["userTW"]);
+                $this->success("Your profile has been updated successfully");
+                $results = $this->model('Users')->getUserInfo($_SESSION["userID"]);
+                foreach($results as $result){
+                    foreach ($result as $key => $value) {
+                        $index->assign($key, $value);
+                    }
                 }
+                $_SESSION['userName'] = $_POST["userName"];
+                header("Refresh:3");
+                unset($_SESSION['post']);
             }
-            $_SESSION['userName'] = $_POST["userName"];
-            header("Refresh:3");
         }
         $this->setView();
     }

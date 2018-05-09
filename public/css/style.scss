@@ -1,0 +1,682 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* Colors */
+$red: #ae1812;
+$blue: #3f91e0;
+$orange: #efb81e;
+$darkgrey: #393939;
+$lightgrey: #e2e2e2;
+
+.blue{
+    background-color: $blue;
+}
+
+.red{
+    background-color: $red;
+}
+
+.orange{
+    background-color: $orange;
+}
+
+.font_blue{
+    color: $blue !important;
+}
+
+.font_red{
+    color: $red !important;
+}
+
+.font_orange{
+    color: $orange !important;
+}
+
+
+body, html, .section, .slide{
+    height: 100%;
+    width: 100%;
+}
+
+body, p{
+    color: $lightgrey;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+/* unvisited link */
+
+a:link,
+a:visited {
+    color: $lightgrey;
+    font-weight: bolder;
+    font-size: 1.33em;
+    text-decoration: none;
+}
+
+/* mouse over link */
+
+a:hover {
+    color: $orange !important;
+    text-decoration: none;
+}
+
+/* selected link */
+
+a:active {
+    color: $red !important;
+    text-decoration: none;
+}
+
+a.active, a:focus{ 
+    color: $blue !important; 
+    text-decoration: none;
+}
+
+.navbar-bg {
+    background-color: rgba( $darkgrey, .9 );
+    color: $lightgrey;
+    border-bottom: 2px solid $red;
+}
+
+.adminnav{
+    background-color: rgba( $red, .9 );
+    color: $darkgrey;
+    margin-top: 7vh;
+    height: 6vh;
+    width: 100%;
+    z-index: 900;
+    position: fixed;
+}
+
+#section0{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../img/easvcom.png");
+    background-size: cover;
+}
+
+#section1{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../img/com.jpg");
+    background-size: cover;
+}
+
+#section3{
+    background-color: orange;
+}
+
+#section4{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../img/building.jpg");
+    background-size: cover;
+}
+
+.forum{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../img/building.jpg");
+    background-size: cover;
+}
+
+.slide{
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../img/building.jpg");
+    background-size: cover;
+
+}
+
+.slider{
+    margin-top: 20vh;
+}
+
+.slog1 {
+    margin-left: 35%;
+    margin-top: 20vh;
+    position: absolute;
+    width: 25%;
+    height: 7vh;
+    background-color: $darkgrey;
+    border: 2px solid $red;
+    text-align: center;
+    color: $red;
+}
+
+.slog2 {
+    margin-left: 15%;
+    margin-top: 35vh;
+    position: absolute;
+    width: 25%;
+    height: 7vh;
+    background-color: $darkgrey;
+    border: 2px solid $orange;
+    text-align: center;
+    color: $orange;
+}
+
+.slog3 {
+    margin-left: 55%;
+    margin-top: 35vh;
+    position: absolute;
+    width: 25%;
+    height: 7vh;
+    background-color: $darkgrey;
+    border: 2px solid $blue;
+    text-align: center;
+    color: $blue;
+}
+
+.slog1 h2,
+.slog2 h2,
+.slog3 h2 {
+    padding-top: 10px;
+    font-weight: bolder;
+}
+
+.welcome h1 {
+    font-weight: bolder;
+}
+
+.welcome h3 {
+    color: $orange;
+}
+
+.welcome {
+    margin-top: 85vh;
+    height: 15vh;
+    width: 100%;
+    border-top: 2px solid $blue;
+    border-bottom: 2px solid $blue;
+    text-align: center;
+    padding: 3vh;
+    color: $lightgrey;
+    position: absolute;
+    background-color: rgba( $darkgrey, 0.7 );
+    z-index: 100;
+}
+
+.hotties{
+    top: 50vh;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hot_threads, .latest_threads, .latest_posts{
+    width: 20%;
+    height: auto;
+    background-color: rgba( $darkgrey, .7 );
+    float: left;
+    margin-left: 10%;
+    margin-top: 2.5vh;
+    border: 1px solid black;
+    -webkit-box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.4);
+}
+
+.headline{
+    height: 4vh;
+    text-align: center;
+    color: $darkgrey;
+    padding: 0.5vh;
+}
+
+.headline h4{
+    font-weight: bolder;
+}
+
+.infos_headline{
+    width: 100%;
+    height: 4vh;
+    border: 1px solid black;
+    display: block;
+    padding: 5px;
+    background-color: rgba( $lightgrey, .7 );
+    color: black !important;
+}
+
+.headline1, .headline2{
+    float: left;
+}
+
+.headline1{
+    width: 60%;
+    margin-left: 5%;
+}
+
+.headline2{
+    width: 35%;
+    text-align: center;
+}
+
+.info_line{
+    width: 100%;
+    border: 1px solid black;
+}
+
+.firstInfo a{
+    font-size: 1em !important;
+}
+
+.firstInfo,.secondInfo{
+    float: left;
+}
+
+.firstInfo{
+    width: 60%;
+    margin-left: 5%;
+    margin-top: 2%;
+    color: $lightgrey;
+    border-bottom: 1px solid black;
+}
+
+.secondInfo{
+    width: 35%;
+    margin-top: 2%;
+    color: $lightgrey;
+    text-align: center;
+}
+
+
+.social{
+	text-align:center;
+    font-size:16px;
+    padding-bottom: 5px;
+}
+
+.social-login{
+	text-align:center;
+	font-size:12px;
+}
+.social-login p{
+	margin:15px 0;
+}
+.social-login ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+.social-login ul li{
+	width:33%;
+	float:left;
+    clear:fix;
+}
+.social-login ul li a{
+	font-size:13px;
+	color:#fff !important;
+	text-decoration:none;
+	padding:10px 0;
+	display:block;
+}
+
+.social-login ul li a:hover{
+	font-size:13px;
+	color: black !important;
+	text-decoration:none;
+	padding:10px 0;
+	display:block;
+}
+
+.social-login ul li:nth-child(1) a{
+	background:#3b5998;
+}
+.social-login ul li:nth-child(2) a{
+	background:#e74c3d;
+}
+.social-login ul li:nth-child(3) a{
+	background:#3698d9;
+}
+
+.abouts{
+    padding-top: 20vh;
+}
+
+.category_head{
+    height: 6vh;
+    background-color: $red;
+    color: $lightgrey;
+    font-weight: bolder;
+    padding: 10px;
+    font-size: 1.333em;
+}
+
+.category_head li a:hover{
+    color: $blue !important;
+    text-decoration: none;
+}
+
+.cat_active{
+    color: $orange;
+    font-weight: bolder;
+    font-size: 1.333em;
+}
+
+.category_headline{
+    height: 5vh;
+    background-color: $darkgrey;
+    color: $lightgrey;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid $red;
+}
+
+.cat_border{
+    border: 1px solid $red !important;
+}
+
+.forum_rows{
+    padding: 10px;
+    background-color: rgba( $darkgrey, .7 );
+    height: 7.5vh;
+    color: $lightgrey !important;
+    border-bottom: 1px solid $orange; 
+}
+
+.forum_rows2{
+    padding: 10px;
+    background-color: rgba( $darkgrey, .7 );
+    height: 6vh;
+    color: $lightgrey !important;
+    border-bottom: 1px solid $orange; 
+}
+
+.forum_rows3{
+    padding: 10px;
+    background-color: rgba( $darkgrey, .9 );
+    height: auto;
+    color: $lightgrey !important;
+    border-bottom: 1px solid $orange; 
+    font-weight: 400;
+}
+
+.forum_rows a{
+    color: $lightgrey !important;
+    text-decoration: none !important;
+}
+
+.forum_rows a:hover{
+    color: $blue !important;
+    text-decoration: none !important;
+}
+
+.pagination_and_button{
+    padding: 15px;
+    height: 5vh;
+    background-color: $red;
+    text-align: right;
+}
+
+.btn-newThread a:hover, .btn-newThread2 a:hover{
+    color: white;
+}
+
+.button, input[type=submit]{
+    text-align: center;
+    padding: 5px;
+    background-color: $darkgrey !important;
+    border-radius: 5px;
+    border: 1px solid $lightgrey;
+    font-size: 1em !important;
+    color: $lightgrey;
+    font-weight: bolder;
+}
+
+input[type=submit]{
+    color: $lightgrey;
+}
+
+.button a, .newThread2 a:hover{
+    font-size: 1em !important;
+    text-decoration: none !important;
+}
+
+main{
+    margin-top: 5vh;
+}
+
+.center, h3.center{
+    text-align: center !important;
+}
+
+.rows{
+    display: inline-table;
+    height: auto;
+}
+
+.userdetails{
+    text-align: center;
+}
+
+.line{
+    width: 100%;
+    height: 3vh;
+    border: 1px solid black;
+    margin-bottom: 2%;
+    background-color: rgba($color: #000000, $alpha: .5)
+}
+
+.line:nth-child(n+2){
+    text-align: left;
+    padding-left: 30%;
+}
+
+.line2{
+    padding-left: 30%;
+    text-align: left;
+    width: 100%;
+    height: 3vh;
+    border: 1px solid black;
+    margin-bottom: 2%;
+    background-color: rgba($color: $darkgrey, $alpha: .5)
+}
+
+.picture{
+    width: 100%;
+    height: auto !important;
+    margin-bottom: 2%;
+}
+
+img{
+   border: 2px solid $red !important;
+}
+
+.textbg{
+    background-color: $darkgrey;
+    border: 1px  solid black;
+    color: $lightgrey !important;
+}
+
+.threadText{
+    padding: 1%;
+    color: $lightgrey !important;
+}
+
+.title{
+    font-size: 1.333em;
+    font-weight: bolder;
+}
+
+.fa, .fas{
+    color: $blue !important;
+}
+
+.hidden{
+    display: none;
+}
+
+.tool {
+    cursor : help;
+    position : relative;
+  }
+  
+  .tool::before, .tool::after {
+    position : absolute;
+    left : 50%;
+    opacity : 0;
+    z-index: -100;
+  }
+  
+  .tool:hover::before, .tool:focus::before, .tool:hover::after, .tool:focus::after {
+    opacity : 1;
+    z-index: 100;
+  }
+  
+  .tool::before {
+    border-style : solid;
+    border-width : 1em .75em 0 .75em;
+    border-color : $blue transparent transparent transparent;
+    bottom : 100%;
+    margin-left : -.5em;
+    content : " ";
+  }
+  
+  .tool::after {
+    background : #3e474f;
+    border-radius : .25em;
+    bottom : 145%;
+    color : white;
+    font-size: 12px;
+    width : auto;
+    padding: 1em;
+    margin-left : -8.75em;
+    content : attr(data-tip);
+    border: 1px solid $blue;
+  }
+
+  .error{
+    background-color: rgba($color: $red, $alpha: .5);
+    text-align: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    font-size: 1.22em;
+    color: $lightgrey;
+    padding: 5px;
+    border: 1px solid $red;
+}
+
+.success{
+    background-color: rgba($color: green, $alpha: .5);
+    text-align: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    font-size: 1.22em;
+    color: $lightgrey;
+    padding: 5px;
+    border: 1px solid $red;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type=text],input[type=password],input[type=email], textarea {
+    background-color: $darkgrey;
+    border: 1px solid black;
+    color: $orange;
+    height: 4vh;
+}
+
+
+.textInput{
+    height: auto;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.spaces{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.spacer{
+    height: 1vh;
+}
+
+.error a, .success a{
+    font-size: 1em;
+}
+
+
+.seperator{
+    height: 2vh;
+    width: 100%;
+    border-bottom: 1px solid $orange;
+    background-color: red;
+}
+
+.bt{
+    margin-top: -3%;
+}
+
+.sp{
+    height: 20px;
+    width: 100%;
+    margin-top:17vh;
+}

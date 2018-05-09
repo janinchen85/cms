@@ -1,20 +1,24 @@
 {$header}
 {$navbar}
-<br><br><br><br>
-<main role="main" class="container mx-auto w-100 justify-content-center">
-    <div class="row">
-        <ol class="container breadcrumb card-header bg-dark border_color">
-            <li><a href="../home">{$categoryName}</a> / </li>
-            <li><a href="../forum/{$forumID}">&nbsp;{$forumName}</a> / </li>
-            <li class="active">&nbsp;New Thread Error</li>
-        </ol>  
-    </div>
-        <div class="row">
-            <div class="container breadcrumb card-header bg-dark border_color justify-content-center">
-                <div class="row">
-                    <div class="col-md-12">You have to be <a href="../login">logged in</a> or <a href="../register">resgistered</a>, before you can create new Topics.</div>
-                </div>
-            </div>
-        </div>
+<div class="section forum" id="section2">
+<br>
+<br>
+<br>
+<br>
+<main role="main" class="container cat_border">
+  <div class="row category_head">
+  <ol>
+      <li>
+        <a href="{$root}#forum/{$catNumber}">{$categoryName}</a> / 
+      </li>
+      <li>
+        <a href="{$root}forum/{$forumID}">&nbsp;{$forumName}</a> / 
+      </li>
+      <li class="cat_active">&nbsp;New Thread</li>
+    </ol>
+  </div>
+  <div class="row forum_rows rows">
+    <div class="col-md-12 center">You have to be <a href="../login">logged in</a> or <a href="../register">resgistered</a>, before you can create new Topics.</div>
+  </div>
 </main>
 {$footer}

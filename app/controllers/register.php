@@ -2,7 +2,7 @@
 class Register extends Controller{
 
     public function index(){
-        $index = $this->heading("register");
+        $index = $this->heading("register","","navbar");
         $this->setTitle("Easv Forum - Register");
         $index->assign("hideForm", "");
         $index->assign("userName", "");
@@ -55,6 +55,15 @@ class Register extends Controller{
                               It must have at least 6 characters <br>
                               It must contain at least one number <br>
                               It can not have spaces.";
+                $errorocount++;
+            }
+            $userName = $_POST["userName"];
+            if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $userName)){
+                $message[] = "Please dont use any special chars in your name!";
+                $errorocount++;
+            }
+            if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST["userPW"])){
+                $message[] = "This chars are not allowed to use in your password: [\'^£$%&*()}{@#~?><>,|=_+¬-]";
                 $errorocount++;
             }
             $this->errors($message, $errorocount);
