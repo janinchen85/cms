@@ -7,23 +7,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
 <main role="main" class="container cat_border">
 <div class="row category_head">
     <ol>
-        <li>About Text</li>
+        <li>Add Rule</li>
     </ol>
   </div>
   {$success} {$error}
     <div class="{$hideForm}">
     <form method="post">
       <div class="row forum_rows2">
-        <div class="col-md-1 title">Title:</div>
-        <div class="col-md-10 title"><input type="text" size="80%" name="pTitle" onfocus="if(this.value == '{$pTitle}') { this.value = ''; }" value="{$pTitle}"></input></div>
+        <div class="col-md-2 title">Title:</div>
+        <div class="col-md-8 title"><input type="text" size="65%" name="ruleTitle" onfocus="if(this.value == '{$ruleTitle}') { this.value = ''; }" value="{$ruleTitle}"></input></div>
       </div>
       <div class="row forum_rows row textInput">
-        <div class="col-md-1 title"></div>
-        <div class="col-md-10">
-            <textarea id="eg-dark-theme" name="pText" style="height:300px;width:100%;">{$pText}</textarea>
+        <div class="col-md-2 title">Description</div>
+        <div class="col-md-8">
+            <textarea name="ruleDesc" >{$ruleDesc}</textarea>
         </div>
       </div>
       <div class="row pagination_and_button">

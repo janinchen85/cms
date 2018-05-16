@@ -117,6 +117,30 @@ class Home extends Controller{
                       'X-Mailer: PHP/' . phpversion();
             mail($toEmail, $title, $text, $header);
         }
+
+
+        $number = 0;
+            $results = $this->model('Rules')->getRules();
+            if(!empty($results)){
+                $index->assign("hide", "row forum_rows2");
+                foreach($results as $result){
+                    $number++;
+                    $rulesList = new tpl("home/rulesList");
+                    foreach($result as $key => $value) {
+                        $rulesList->assign($key, $value);
+                        $rulesList->assign("ruleID", $number);
+                        $rulesList->assign("root", $this->getRoot());
+                    }
+                    $rulesListRow[] = $rulesList;
+                }
+                $rulesListContents = tpl::merge($rulesListRow);
+                $index->assign("rulesList", $rulesListContents);
+            } else {
+                $index->assign("hide", "hidden");
+                $rulesListError = new tpl("admin/rulesListError");
+                $index->assign("rulesList", $rulesListError->replace());
+            }
+
         $this->setView();
     }
 }

@@ -1,7 +1,7 @@
 # Activates the forwarding
     RewriteEngine On
 # Specifies the directory where to start changing the URL.
-    RewriteBase /cms/public
+    RewriteBase /actualcms/test/
 # This conditions that must be true.
 # If the requested filename is not a directory
     RewriteCond %{REQUEST_FILENAME} !-d

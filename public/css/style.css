@@ -80,6 +80,7 @@ table {
 body, html, .section, .slide {
   height: 100%;
   width: 100%;
+  padding-bottom: 10vh;
 }
 
 body, p {
@@ -95,6 +96,11 @@ ul {
 
 li {
   float: left;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px !important;
 }
 
 /* unvisited link */
@@ -154,7 +160,10 @@ a.active, a:focus {
 }
 
 #section3 {
-  background-color: orange;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../img/Blackboard.png");
+  background-size: cover;
 }
 
 #section4 {
@@ -390,6 +399,10 @@ a.active, a:focus {
   padding-top: 20vh;
 }
 
+.rules {
+  padding-top: 10vh;
+}
+
 .category_head {
   height: 6vh;
   background-color: #ae1812;
@@ -463,6 +476,11 @@ a.active, a:focus {
   height: 5vh;
   background-color: #ae1812;
   text-align: right;
+  text-decoration: none;
+}
+
+.pagination_and_button a:hover {
+  text-decoration: none;
 }
 
 .btn-newThread a:hover, .btn-newThread2 a:hover {
@@ -478,6 +496,7 @@ a.active, a:focus {
   font-size: 1em !important;
   color: #e2e2e2;
   font-weight: bolder;
+  text-decoration: none;
 }
 
 input[type=submit] {
@@ -676,5 +695,20 @@ input[type=text], input[type=password], input[type=email], textarea {
   height: 20px;
   width: 100%;
   margin-top: 17vh;
+}
+
+.rulesTitle {
+  font-size: 1.22em;
+  font-weight: bold !important;
+  color: #efb81e !important;
+}
+
+.rulesDesc {
+  border-left: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+}
+
+.rulesRow {
+  height: auto;
 }
 /*# sourceMappingURL=style.css.map */
