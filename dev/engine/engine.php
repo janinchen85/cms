@@ -20,23 +20,20 @@ class tpl {
  // ################ Configurations ######################
     // The folder in which the templates are located
     private $tplDir = "../app/views/";
-    // The complete path of the template file.
+    // The variable for the complete path of the template file.
     private $tplFile = "";
-    // The file name of the template file.
+    // The variable for the name of the template file.
     private $tplName = "";
     // File type .html .tpl etc
     private $tplType = ".php";
-
     // Delimiter for standard placeholder example: {$key}
     private $lDel = '{$'; // left
     private $rDel = '}';  // right  
-
-    // The content of the template.
+    // The variable for content of the template.
     private $template = "";
-
  // ################ End of Configurations #################
     protected $values = array();
-
+    // ################ Constructor ######################
     /** Constructor
      *
      *  @access    public
@@ -56,7 +53,7 @@ class tpl {
         // this will call the method open and will send the template file/path as parameter
         $this->open($this->tplFile);
     }
-
+    // ################ Load template file ######################
     /** Load template file
      * 
      * @access    private
@@ -77,7 +74,7 @@ class tpl {
         // if the file exists, save all the content into the $template variable
         $this->template = file_get_contents($file);
     }
-
+    // ################ Assign values for your placeholder ######################
     /** Assign values for your placeholder
      * 
      * @access    public
@@ -98,7 +95,7 @@ class tpl {
         // Save all replacements into an array
         $this->values[$key] = $value;
     }
-
+    // ################ Final replacements ######################
     /** Final replacements
      * 
      * @access    public
@@ -125,7 +122,7 @@ class tpl {
         // returns the template with all replacements
         return $this->template;
     }
-    
+    // ################ Combine templates with each other. ######################
     /** Combine templates with each other.
      * 
      * @access    public
@@ -150,7 +147,7 @@ class tpl {
         // return it
         return $output;
         }
-    
+    // ################ Finally show everything ######################
     /** Finally show everything
      * 
      * @access    public
@@ -162,7 +159,5 @@ class tpl {
      public function show(){
         echo $this->template;
      }   
-
 }
-
 ?>

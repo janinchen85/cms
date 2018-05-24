@@ -46,9 +46,8 @@ class App{
             }
         } else {
             // if the controller doesn't exsist, return an error
-            echo "Sorry, this Page does not exist.";
-        }
-        
+            echo "Sorry, this page does not exist: ".$this->controller;
+        }  
     }
     // Method: parseURL()
     public function parseURL(){

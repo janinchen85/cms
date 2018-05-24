@@ -33,14 +33,22 @@ class Users extends DB{
         return $this->db->results(); 
     }
 
+    // Method: getUserInfo()
+    // Parameter: $userID
     public function getUserInfo($userID){
+        // set DB connection
         $this->db->connect();
+        // set SQL Query string
         $this->sql = 'SELECT * FROM user 
                       WHERE userID = :userID';
+        // send query              
         $this->db->query($this->sql);
+        // bind the parameter to placeholder
         $this->db->bind(':userID', $userID);
+        // close the connection
         $this->db->close();
-        return $this->db->results(); 
+        // return the result
+        return $this->db->result(); 
     }
 
     public function newUser($userName, $userEmail, $userPW){
@@ -56,10 +64,10 @@ class Users extends DB{
         $this->db->close();
     }
 
-    public function updateUserInfo($userID, $userName, $userEmail, $userCourse, $userFB, $userTW){
+    public function updateUserInfo($userID, $userName, $userEmail, $userCourse, $userFB, $userTW, $userPW){
         $this->db->connect();
         $this->sql = 'UPDATE user 
-                      SET userName = :userName, userEmail = :userEmail, userCourse = :userCourse, userFB = :userFB, userTW = :userTW
+                      SET userName = :userName, userEmail = :userEmail, userCourse = :userCourse, userFB = :userFB, userTW = :userTW, userPW = :userPW
                       WHERE userID = :userID';
         $this->db->query($this->sql);
         $this->db->bind(':userID', $userID);
@@ -68,6 +76,7 @@ class Users extends DB{
         $this->db->bind(':userCourse', $userCourse);
         $this->db->bind(':userFB', $userFB);
         $this->db->bind(':userTW', $userTW);
+        $this->db->bind(':userPW', trim(password_hash($userPW, PASSWORD_BCRYPT)));
         $this->db->execute();
         $this->db->close();
     }
@@ -139,6 +148,14 @@ class Users extends DB{
         $this->db->bind(':userStatus', $status);
         $this->db->execute();
         $this->db->close();
+    }
+
+    public function getLatestUsers(){
+        $this->db->connect();
+        $this->sql = 'SELECT * FROM user ORDER BY userRegDate DESC LIMIT 5';
+        $this->db->query($this->sql);
+        $this->db->close();
+        return $this->db->results(); 
     }
 }
 

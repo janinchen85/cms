@@ -15,8 +15,11 @@ class Thread extends Controller {
                 $threadView->assign($key, $value);
             }
         }
-        $threadVisits++;
-        $this->model('Threads')->countThreadVisit($threadID, $threadVisits);
+        if($_SESSION["active"] == 1 && $_SESSION["visited"] == 0){
+            $threadVisits++;
+            $_SESSION["visited"] = 1;
+            $this->model('Threads')->countThreadVisit($threadID, $threadVisits);
+        }
         $results = $this->model('Categories')->getCategoryOfForum($result["forumID"]);
         foreach ($results as $result) {
             foreach ($result as $key => $value) {
@@ -24,8 +27,7 @@ class Thread extends Controller {
             }
             $threadView->assign("catNumber", $result["categoryID"] - 1);
         }
-        $results = $this->model('Users')->getUserInfo($threadUser);
-        foreach ($results as $result) {
+        $result = $this->model('Users')->getUserInfo($threadUser);
             foreach ($result as $key => $value) {
                 $threadView->assign($key, $value);
             }
@@ -43,7 +45,7 @@ class Thread extends Controller {
             $threadView->assign("userPosts", $result["userPosts"]);
             $result = $this->model("Users")->countUserThreads($threadUser);
             $threadView->assign("userThreads", $result["userThreads"]);
-        }
+        
         if (empty($_SESSION["userID"])) {
             $threadView->assign('hidden', "hidden");
         }
@@ -74,8 +76,7 @@ class Thread extends Controller {
                 foreach ($result as $key => $value) {
                     $postView->assign($key, $value);
                 }
-                $results = $this->model('Users')->getUserInfo($postUser);
-            foreach ($results as $result) {
+                $result = $this->model('Users')->getUserInfo($postUser);
                 foreach ($result as $key => $value) {
                     $postView->assign($key, $value);
                 }
@@ -93,7 +94,7 @@ class Thread extends Controller {
                 $postView->assign("userPosts", $result["userPosts"]);
                 $result = $this->model("Users")->countUserThreads($postUser);
                 $postView->assign("userThreads", $result["userThreads"]);
-            }
+            
             $results = $this->model('Posts')->getLastPostEditor($postID);
             foreach ($results as $result) {
                 $postView->assign("editUserName", $result['userName']);
@@ -143,7 +144,9 @@ class Thread extends Controller {
         if (isset($_POST["edit"])) {
             $threadEdits++;
             $index->assign("hideForm", "hidden");
-            $this->model('Threads')->editThread($_POST["pTitle"], $_POST["pText"], $threadID, $threadEdits, $_SESSION["userID"]);
+            $pTitle = filter_var($_POST["pTitle"], FILTER_SANITIZE_STRING);
+            $pText = preg_replace('/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius', '', $_POST["pText"]);
+            $this->model('Threads')->editThread($pTitle, $pText, $threadID, $threadEdits, $_SESSION["userID"]);
             $this->success("Your thread has been updated successfully.
                             If you are not redirected automatically, follow this <a href=\"../$threadID\">&nbsp;link</a>.");
             header("Refresh:4 url=" . $this->getRoot() . "thread/" . $threadID . "");
@@ -153,7 +156,7 @@ class Thread extends Controller {
     public function postEdit($postID = '') {
         $results = $this->model('Posts')->getPost($postID);
         foreach ($results as $result) {
-            $threadEdits = $result["threadEdits"];
+            $postEdits = $result["postEdits"];
             if ($_SESSION["userID"] != $result["userID"]) {
                 header("Location: ../../error");
             } else {
@@ -176,10 +179,12 @@ class Thread extends Controller {
                 $index->assign($key, $value);
             }
         }
-        if (isset($_POST["edit"])) {
+        if(isset($_POST["edit"])) {
             $postEdits++;
             $index->assign("hideForm", "hidden");
-            $this->model('Posts')->editPost($_POST["pTitle"], $_POST["pText"], $threadID, $postEdits, $_SESSION["userID"]);
+            $pTitle = filter_var($_POST["pTitle"], FILTER_SANITIZE_STRING);
+            $pText = preg_replace('/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius', '', $_POST["pText"]);
+            $this->model('Posts')->editPost($pTitle, $pText, $postID, $postEdits, $_SESSION["userID"]);
             $this->success("Your thread has been updated successfully.
                             If you are not redirected automatically, follow this <a href=\"../$threadID\">&nbsp;link</a>.");
             header("Refresh:4 url=" . $this->getRoot() . "thread/" . $threadID . "");
@@ -206,7 +211,9 @@ class Thread extends Controller {
         }
         if (isset($_POST["reply"])) {
             $index->assign("hideForm", "hidden");
-            $this->model('Posts')->addPost($_POST["pTitle"], $_POST["pText"], $_SESSION["userID"], $threadID);
+            $pTitle = filter_var($_POST["pTitle"], FILTER_SANITIZE_STRING);
+            $pText = preg_replace('/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius', '', $_POST["pText"]);
+            $this->model('Posts')->addPost($pTitle, $pText, $_SESSION["userID"], $threadID);
             $this->success("Your thread has been updated successfully.
                             If you are not redirected automatically, follow this <a href=" . $this->getRoot() . "thread/" . $threadID . ">&nbsp;link</a>.");
             header("Refresh:3 url=" . $this->getRoot() . "thread/" . $threadID . "");
@@ -226,7 +233,9 @@ class Thread extends Controller {
             $index->assign("hideText", "hidden");
             if (isset($_POST["newThread"])) {
                 $index->assign("hideForm", "hidden");
-                $id = $this->model('Threads')->addNewThread($_POST["pTitle"], $_POST["pText"], $_SESSION["userID"], $forumID);
+                $pTitle = filter_var($_POST["pTitle"], FILTER_SANITIZE_STRING);
+                $pText = preg_replace('/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius', '', $_POST["pText"]);
+                $id = $this->model('Threads')->addNewThread($pTitle, $pText, $_SESSION["userID"], $forumID);
                 $this->model('Users')->addUserPostCount($_SESSION["userID"]);
                 $this->success("Your thread has been created successfully.");
                 header("Refresh:3 url=../thread/" . $id . "");

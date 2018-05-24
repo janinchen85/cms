@@ -1,4 +1,5 @@
 {$header} 
+{$navbar}
 <div class="section forum" id="section2">
 <br><br><br><br>
 <main role="main" class="container cat_border">

@@ -16,6 +16,7 @@ class Controller {
         $this->viewDir              = '../app/views/';
         $this->index                = "home";
         $this->method               = "index";
+        $this->navbar               = "navbar";
         $this->header               = new tpl('style/header');
         $this->footer               = new tpl('style/footer');
         $this->loggedIn             = new tpl('style/loggedin');
@@ -25,36 +26,70 @@ class Controller {
         $this->error                = new tpl('message/error');
         $this->forum                = new tpl('forum/index');
     }
-
+    // Method: model()
+    // Parameter: $model
     public function model($model){
-        require_once $this->modelDir.$model.'.php';
-        return new $model();
+        $modelFile = $this->modelDir.$model.'.php';
+        // cheack if the file with this name exist
+        if(file_exists($modelFile)){
+            // if the file exist and is not already included, include this file
+            require_once $modelFile; 
+            // create new Object of the model class
+            return new $model();
+        } else {
+            echo "Could not find this model: " .$modelFile; 
+        }
     }
-
+    // Method: view()
+    // Parameter: $view
+    // This method is currently not needed
     public function view($view){
-        require_once $this->viewDir.$view.'.php';
+        // save filepath in the variable $viewFile
+        $viewFile = $this->viewDir.$view.'.php';
+        // cheack if the file with this name exist
+        if(file_exists($viewFile)){
+            // if the file exist and is not already included, include this file
+            require_once $viewFile;
+        } else {
+            echo "Could not find this view: " .$viewFile; 
+        }
     }
 
     public function getRoot(){
         return $this->root;
     }
 
+    // Method: index()
+    // Parameter: $index, $method, $navbar
     public function heading($index = "", $method = "", $navbar = ""){
-        $this->nav                  = new tpl('style/'.$navbar.'');
-        if(!empty($method)){$this->method = $method;}
-        if(!empty($index)){$this->index = $index;}
+        // create a new template object for navbar
+        $this->nav = new tpl('style/'.$navbar.'');
+            // if the parameter variable $method is not empty rewrite the value of $this->method
+            // with the value of the parameter variable $method
+            if(!empty($method)){$this->method = $method;}
+            // if the parameter variable $index is not empty rewrite the value of $this->index
+            // with the value of the parameter variable $index
+            if(!empty($index)){$this->index = $index;}
+        // create a new tpl Object, so it can be user for the view
         $this->index = new tpl($this->index.'/'.$this->method);
-        if(!empty($_SESSION["active"])){
-            $this->loggedIn->assign("userName", $_SESSION['userName']);
-            $this->nav->assign("loggedinout", $this->loggedIn->replace());
-        } else {
-            $this->nav->assign("loggedinout", $this->loggedOut->replace());
-        }
-        if(isset($_SESSION["userRang"]) && $_SESSION["userRang"] == 1){
-            $this->nav->assign('adminNav', $this->adminNav->replace());
-        } else {
-            $this->nav->assign('adminNav', ""); 
-        }
+            // check if active session
+            if(!empty($_SESSION["active"])){
+                // assign the Username 
+                $this->loggedIn->assign("userName", $_SESSION['userName']);
+                // Show Logged in navigation (username and logout)
+                $this->nav->assign("loggedinout", $this->loggedIn->replace());
+            } else {
+                // Show logged out navigation (login and register)
+                $this->nav->assign("loggedinout", $this->loggedOut->replace());
+            }
+            // if the userRang is 1 (=administrator) then show admin navibar
+            if(isset($_SESSION["userRang"]) && $_SESSION["userRang"] == 1){
+                // show admin navibar
+                $this->nav->assign('adminNav', $this->adminNav->replace());
+            } else {
+                // else dont show admin navbar
+                $this->nav->assign('adminNav', ""); 
+            }
         $this->index->assign('header', $this->header->replace());
         $this->index->assign('navbar', $this->nav->replace());
         $this->index->assign('forum', $this->forum->replace());
@@ -70,6 +105,7 @@ class Controller {
     }
 
     public function setSession($sessionUserID, $sessionUserName, $sessionUserRang){
+        $_SESSION["visited"] = 0;
         $_SESSION["active"] = 1;
         $_SESSION["userID"] = $sessionUserID;
         $_SESSION["userName"] = $sessionUserName;
@@ -108,6 +144,8 @@ class Controller {
             $i++;
         }
     }
+
+
 
     public function randomStr($length = 5) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
