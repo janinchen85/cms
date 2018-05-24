@@ -1,14 +1,18 @@
 <?php
 class Home extends Controller{
+    // Mehtod: index()
     public function index(){
+        // set views
         $index = $this->heading("home","","navbar");
         $this->setTitle("EASV Forum");
+        // get about data
         $results = $this->model('Abouts')->getAbout();
         foreach($results as $result){
             foreach ($result as $key => $value) {
                 $index->assign($key, $value);
             }
         }
+        // get hot Threads
         $results = $this->model('Threads')->getHotThreads();
         foreach($results as $result){
             $hotList = new tpl("home/hotLists");
@@ -22,6 +26,7 @@ class Home extends Controller{
         }
         $hotListContents = tpl::merge($hotListRow);
         $index->assign("hotList", $hotListContents);
+        // get latest Threads
         $results = $this->model('Threads')->getLatestThreads();
         foreach($results as $result){
             $lastT = new tpl("home/hotLists");
@@ -39,10 +44,23 @@ class Home extends Controller{
         }
         $lastTContents = tpl::merge($lastTRow);
         $index->assign("lastT", $lastTContents);
-      /*  
-        $lastP = new tpl("home/hotLists");
-        $index->assign("lastP", $lastPContents);
-    */
+        // get latest User
+        $results = $this->model('Users')->getLatestUsers();
+        foreach($results as $result){
+            $lastU = new tpl("home/latest_user_list");
+            foreach ($result as $key => $value) {
+                $lastU->assign("firstInfo", $result["userName"]);
+                $date = strtotime($result["userRegDate"]);
+                $date = date("d.m.y", $date);
+                $lastU->assign("secondInfo", $date);
+                $lastU->assign("userID", $result["userID"]);
+                $lastU->assign("root",$this->getRoot());
+            }
+            $lastURow[] = $lastU;
+        }
+        $lastUContents = tpl::merge($lastURow);
+        $index->assign("lastU", $lastUContents);
+
 
         $index->assign("content", "{\$categoryList}");
         $results = $this->model('Categories')->getCategories();
@@ -109,9 +127,9 @@ class Home extends Controller{
         }
         if(isset($_POST["send"])){
             $fromEmail = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-            $name = filter_var($_POST["name"], FILTER_SANITIZE_SPECIAL_CHARS);
-            $title = filter_var($_POST["title"], FILTER_SANITIZE_SPECIAL_CHARS);
-            $text = filter_var($_POST["text"], FILTER_SANITIZE_SPECIAL_CHARS);
+            $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
+            $title = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
+            $text = filter_var($_POST["text"], FILTER_SANITIZE_STRING);
             $header = 'From: ' .$fromEmail. "\r\n" .
                       'Reply-To: ' .$fromEmail. "\r\n" .
                       'X-Mailer: PHP/' . phpversion();

@@ -33,11 +33,15 @@
          {$lastT}
          <div class="sp"></div>
       </div>
-      <div class="latest_posts">
+      <div class="latest_threads">
          <div class="headline blue">
-            <h4>LATEST POSTS</h4>
+            <h4>LATEST USERS</h4>
          </div>
-         {$lastP}
+         <div class="infos_headline">
+            <div class="headline1">Username</div>
+            <div class="headline2">Date</div>
+         </div>
+         {$lastU}
          <div class="sp"></div>
       </div>
    </div>

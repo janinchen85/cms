@@ -91,7 +91,7 @@ class Threads extends DB{
 
     public function getLatestThreads(){
         $this->db->connect();
-        $this->sql = 'SELECT * FROM `thread` ORDER BY threadDate DESC, threadTime DESC';
+        $this->sql = 'SELECT * FROM `thread` ORDER BY threadDate DESC, threadTime DESC LIMIT 5';
         $this->db->query($this->sql);
         $this->db->close();
         return $this->db->results(); 

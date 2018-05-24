@@ -70,7 +70,7 @@ class Forums extends DB{
 
     public function threadList($forumID){
         $this->db->connect();
-        $this->sql = 'SELECT u.userID, u.userName, t.threadID, t.threadTitle, t.threadDate, t.threadTime, p.postID 
+        $this->sql = 'SELECT u.userID, u.userName, t.threadID, t.threadTitle, t.threadDate, t.threadTime, t.threadVisits, p.postID 
                       FROM thread t
                       JOIN user u
                         ON t.userID = u.userID

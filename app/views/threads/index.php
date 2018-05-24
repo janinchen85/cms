@@ -14,7 +14,7 @@
     </div>
     <div class="row category_headline">
       <div class="col-md-5">Thread</div>
-      <div class="col-md-1"></div>
+      <div class="col-md-1">Views</div>
       <div class="col-md-1">Posts</div>
       <div class="col-md-4">Last Post</div>
     </div>

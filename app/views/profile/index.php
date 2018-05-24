@@ -1,5 +1,4 @@
-{$header}
-{$navbar}
+{$header}{$navbar}
 <div class="section forum" id="section2">
   <br>
   <br>
@@ -43,6 +42,11 @@
               <input name="userFB" class="form-control" type="text" value="{$userFB}">
               <label for="userTW">Twitter</label>
               <input name="userTW" class="form-control" type="text" value="{$userTW}">
+              <div class="border_sep"></div>
+              <label for="userTW">Old Password</label>
+              <input name="userPWOld" class="form-control" type="password" value="{$userPWOld}">
+              <label for="userTW">New Password</label>
+              <input name="userPW" class="form-control" type="password" value="{$userPW}">
               <br>
               <center><button type="submit" name="update" class="button center"><i class="fas fa-edit"></i> Update Userdetails</button></center>
             </form>
