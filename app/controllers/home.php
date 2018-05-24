@@ -15,7 +15,7 @@ class Home extends Controller{
         // get hot Threads
         $results = $this->model('Threads')->getHotThreads();
         foreach($results as $result){
-            $hotList = new tpl("home/hotLists");
+            $hotList = new tpl("home/hotlists");
             foreach ($result as $key => $value) {
                 $hotList->assign("firstInfo", $result["threadTitle"]);
                 $hotList->assign("secondInfo", $result["threadVisits"]);
@@ -29,7 +29,7 @@ class Home extends Controller{
         // get latest Threads
         $results = $this->model('Threads')->getLatestThreads();
         foreach($results as $result){
-            $lastT = new tpl("home/hotLists");
+            $lastT = new tpl("home/hotlists");
             foreach ($result as $key => $value) {
                 $lastT->assign("firstInfo", $result["threadTitle"]);
                 $date = strtotime($result["threadDate"]);
