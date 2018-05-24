@@ -236,9 +236,9 @@ class Thread extends Controller {
                 $pTitle = filter_var($_POST["pTitle"], FILTER_SANITIZE_STRING);
                 $pText = preg_replace('/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius', '', $_POST["pText"]);
                 $id = $this->model('Threads')->addNewThread($pTitle, $pText, $_SESSION["userID"], $forumID);
-                $this->model('Users')->addUserPostCount($_SESSION["userID"]);
+                //$this->model('Users')->addUserPostCount($_SESSION["userID"]);
                 $this->success("Your thread has been created successfully.");
-                header("Refresh:3 url=../thread/" . $id . "");
+                header("Refresh:3 url=" . $this->getRoot() . "thread/" . $id . "");
             }
             $results = $this->model('Categories')->getCategoryOfForum($forumID);
             foreach ($results as $result) {
