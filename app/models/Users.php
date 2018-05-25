@@ -152,7 +152,8 @@ class Users extends DB{
 
     public function getLatestUsers(){
         $this->db->connect();
-        $this->sql = 'SELECT * FROM user ORDER BY userRegDate DESC LIMIT 5';
+        $this->sql = 'CALL get_users_byRegDate';
+        /*$this->sql = 'SELECT * FROM user ORDER BY userRegDate DESC LIMIT 5';*/    
         $this->db->query($this->sql);
         $this->db->close();
         return $this->db->results(); 

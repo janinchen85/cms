@@ -10,7 +10,8 @@ class Abouts extends DB{
 
     public function getAbout(){
         $this->db->connect();
-        $this->sql = 'SELECT * FROM about';
+        $this->sql = 'CALL proc_get_about';
+        /*$this->sql = 'SELECT * FROM about';*/
         $this->db->query($this->sql);
         $this->db->close();
         return $this->db->results();

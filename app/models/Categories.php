@@ -10,8 +10,9 @@ class Categories extends DB{
 
     public function getCategories(){
         $this->db->connect();
-        $this->sql = 'SELECT * FROM category 
-                      ORDER BY categoryOrderID ASC';
+        $this->sql = 'CALL proc_get_category';
+       /* $this->sql = 'SELECT * FROM category 
+                      ORDER BY categoryOrderID ASC';*/
         $this->db->query($this->sql);
         $this->db->close();
         return $this->db->results();
